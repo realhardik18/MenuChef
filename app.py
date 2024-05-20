@@ -1,23 +1,30 @@
 import streamlit as st
 import pandas as pd
 
-# Initialize a session state to store the table data
-if 'data' not in st.session_state:
-    st.session_state['data'] = []
 
-# Title of the app
-st.title('Name and Option Selector')
+st.title('Item List Manager')
 
-# Input fields
-# Submit button
-if st.button('Submit'):
-    if name and option:
-        # Add the input data to the session state
-        st.session_state['data'].append({'Name': name, 'Option': option})
+if 'items' not in st.session_state:
+    st.session_state['items'] = []
+
+
+item_name = st.text_input('Item Name')
+item_price = st.number_input('Item Price', min_value=0.0, step=0.01)
+
+currencies = ['USD', 'EUR', 'GBP', 'JPY', 'AUD', 'CAD', 'CHF', 'CNY', 'SEK', 'NZD']
+item_currency = st.selectbox('Currency', currencies)
+
+if st.button('Add Item'):
+    if item_name and item_price > 0:
+        st.session_state['items'].append({'Name': item_name, 'Price': f'{item_price:.2f} {item_currency}'})
+        st.success(f'Added {item_name} - {item_price:.2f} {item_currency}')
     else:
-        st.error('Please enter a name and select an option.')
+        st.error('Please enter both an item name and a valid price.')
 
-# Display the table
-if st.session_state['data']:
-    df = pd.DataFrame(st.session_state['data'])
+if st.session_state['items']:
+    df = pd.DataFrame(st.session_state['items'])
+    st.write('## Items Table')
     st.table(df)
+else:
+    st.write('No items added yet.')
+
