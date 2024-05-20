@@ -1,5 +1,9 @@
-from creds import WEATHER_API_KEY,WEATHER_API_URL
+from creds import WEATHER_API_KEY,WEATHER_API_URL,SNOWFLAKE_API_TOKEN
+from prompts import categorize_food_prompt
 import requests
+import replicate
+
+replicate=replicate.Client(api_token=SNOWFLAKE_API_TOKEN)
 
 def get_weather(city):
     response = requests.get(
@@ -51,3 +55,14 @@ def recommend_food_type(temperature, humidity):
         hierarchy.append(item[0])
     return hierarchy
 
+def categorize_food(item):
+    input = {
+    "prompt": categorize_food_prompt(item=item),
+    "temperature": 0.2
+    }
+    responses=list()
+    for event in replicate.stream("snowflake/snowflake-arctic-instruct",input=input):
+        responses.append(str(event))
+    return ''.join(responses).strip(' ')
+
+print(categorize_food('salad'))
