@@ -65,4 +65,12 @@ def categorize_food(item):
         responses.append(str(event))
     return ''.join(responses).strip(' ')
 
-print(categorize_food('salad'))
+def get_currencies():
+    with open('currencies.txt','r') as file:
+        currencies='%'.join(file.readlines()).replace('\n','').replace('\t','').split('%')    
+    return currencies
+
+def get_cities():
+    with open('cities.txt','r') as file:
+        cities='%'.join(file.readlines()).replace('\n','').replace('\t','').split('%')    
+    return cities
