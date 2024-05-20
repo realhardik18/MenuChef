@@ -1,3 +1,4 @@
+from helpers import get_cities,get_ingredients, get_weather,get_currencies
 import streamlit as st
 import pandas as pd
 import json
@@ -11,18 +12,15 @@ st.title('Restaurant Menu Manager')
 st.header('Restaurant Details')
 restaurant_name = st.text_input('Enter the name of the restaurant')
 
-cities = ['New York', 'Los Angeles', 'Chicago', 'Houston', 'Phoenix']
-currencies = ['USD', 'EUR', 'GBP', 'JPY', 'AUD']
-
-city = st.selectbox('Choose the city', options=cities)
-currency = st.selectbox('Choose the currency', options=currencies)
+city = st.selectbox('Choose the city', options=get_cities())
+currency = st.selectbox('Choose the currency', options=get_currencies())
+ingredients = st.selectbox('Choose the currency', options=get_ingredients())
 
 st.header('Add Menu Item')
 dish_name = st.text_input('Dish Name')
 dish_price = st.number_input('Price', min_value=0.0, format="%.2f")
 
-ingredients_options = ['Tomato', 'Cheese', 'Basil', 'Chicken', 'Garlic', 'Onion', 'Pepper', 'Salt']
-ingredients = st.multiselect('Ingredients Used', options=ingredients_options)
+ingredients = st.multiselect('Ingredients Used', options=get_ingredients())
 
 if st.button('Add Item'):
     if restaurant_name and city and currency and dish_name and dish_price and ingredients:

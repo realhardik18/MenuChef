@@ -66,11 +66,16 @@ def categorize_food(item):
     return ''.join(responses).strip(' ')
 
 def get_currencies():
-    with open('currencies.txt','r') as file:
+    with open('DropDownOptions\currencies.txt','r') as file:
         currencies='%'.join(file.readlines()).replace('\n','').replace('\t','').split('%')    
     return currencies
 
 def get_cities():
-    with open('cities.txt','r') as file:
+    with open('DropDownOptions\cities.txt','r') as file:
         cities='%'.join(file.readlines()).replace('\n','').replace('\t','').split('%')    
     return cities
+
+def get_ingredients():
+    with open('DropDownOptions\Ingredients.txt','r') as file:
+        ingredients='%'.join(file.readlines()).replace('\n','').replace('\t','').split('%')    
+    return ingredients
