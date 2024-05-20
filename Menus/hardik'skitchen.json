@@ -1,0 +1,18 @@
+{
+    "filename": "hardik'skitchen",
+    "restaurant_name": "hardik's kitchen",
+    "city": "Dhanbad",
+    "currency": "INR",
+    "items": [
+        {
+            "Dish Name": "Chicken soup",
+            "Price": "INR 400.00",
+            "Ingredients": "bread, tomato, cheese, chicken"
+        },
+        {
+            "Dish Name": "salad",
+            "Price": "INR 130.00",
+            "Ingredients": "basil fresh, french dressing, salad dressing, tomatoes, mayonnaise dressing"
+        }
+    ]
+}

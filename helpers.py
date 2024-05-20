@@ -2,6 +2,7 @@ from creds import WEATHER_API_KEY,WEATHER_API_URL,SNOWFLAKE_API_TOKEN
 from prompts import categorize_food_prompt
 import requests
 import replicate
+import json
 
 replicate=replicate.Client(api_token=SNOWFLAKE_API_TOKEN)
 
@@ -12,48 +13,23 @@ def get_weather(city):
     print(response.text)
 
 def recommend_food_type(temperature, humidity):
-    items={
-        'cold-shakes':0,
-        'cold-dessert':0,
-        'room-temp':0,
-        'hot-soup':0,
-        'hot-steamed':0,
-        'hot-fried':0
-
-    }
-    if temperature >= 30:
-        items['cold-shakes']+=1
-        items['cold-dessert']+=1
-        if humidity < 50:
-            items['cold-shakes']+=1
+    if temperature <= 15:
+        if humidity > 50:
+            return 1
         else:
-            items['cold-dessert']+=1
-    elif 20 <= temperature < 30:
-        items['cold-dessert']+=1
-        items['room-temp']+=1
-        if humidity < 50:
-            items['cold-dessert']+=1
+            return 2
+    elif 15 < temperature <= 25:
+        if humidity > 60:
+            return 1
+        elif 40 <= humidity <= 60:
+            return 2
         else:
-            items['room-temp']+=1
-    elif 10 <= temperature < 20:
-        items['room-temp']+=1
-        items['hot-soup']+=1
-        if humidity >= 50:
-            items['hot-soup']+=1
-        else:
-            items['room-temp']+=1
+            return 0
     else:
-        items['hot-fried']+=1
-        items['hot-steamed']+=1
-        if humidity >= 50:
-             items['hot-steamed']+=1
+        if humidity > 50:
+            return 2
         else:
-             items['hot-fried']+=1
-    items=sorted(items.items(), key=lambda x:x[1])
-    hierarchy=list()
-    for item in items[::-1]:
-        hierarchy.append(item[0])
-    return hierarchy
+            return 0
 
 def categorize_food(item):
     input = {
@@ -79,3 +55,22 @@ def get_ingredients():
     with open('DropDownOptions\Ingredients.txt','r') as file:
         ingredients='%'.join(file.readlines()).replace('\n','').replace('\t','').split('%')    
     return ingredients
+
+def add_details(filename):
+    with open(f'Menus\{filename}') as file:
+        data=json.load(file)
+    for dish in  data['items']:
+        dish['type']=categorize_food(dish['Dish Name'])
+        dish['Ingredients']=dish['Ingredients'].replace(', ','|')
+    print(data)
+
+def create_page(filename):
+    markdown_data=''
+    with open(f'Menus\{filename}') as file:
+        data=json.load(file)
+    markdown_data+=f"##{data['restaurant_name']}\n"
+
+
+#print(create_page('jj'))
+add_details("hardik'skitchen.json")
+#print(recommend_food_type(24,84))

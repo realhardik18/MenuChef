@@ -1,0 +1,18 @@
+{
+    "filename": "jj",
+    "restaurant_name": "jj",
+    "city": "Aabenraa",
+    "currency": "AED",
+    "items": [
+        {
+            "Dish Name": "",
+            "Price": "AED 5.00",
+            "Ingredients": "olive oil, water, eggs"
+        },
+        {
+            "Dish Name": "wwe4",
+            "Price": "AED 5.00",
+            "Ingredients": "olive oil, water, eggs"
+        }
+    ]
+}

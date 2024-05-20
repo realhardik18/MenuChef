@@ -6,7 +6,6 @@ import json
 if 'items' not in st.session_state:
     st.session_state['items'] = []
 
-# Title of the app
 st.title('Restaurant Menu Manager')
 
 st.header('Restaurant Details')
@@ -14,7 +13,6 @@ restaurant_name = st.text_input('Enter the name of the restaurant')
 
 city = st.selectbox('Choose the city', options=get_cities())
 currency = st.selectbox('Choose the currency', options=get_currencies())
-ingredients = st.selectbox('Choose the currency', options=get_ingredients())
 
 st.header('Add Menu Item')
 dish_name = st.text_input('Dish Name')
@@ -52,12 +50,13 @@ with CookBtn:
     if st.button('Cook Menu'):
         if st.session_state['items']:
             menu_data = {
+                "filename":restaurant_name.replace(' ',''),
                 'restaurant_name': restaurant_name,
                 'city': city,
                 'currency': currency,
                 'items': st.session_state['items']
             }
-            with open('menu.json', 'w') as json_file:
+            with open(fr'Menus\{menu_data["filename"]}.json', 'w') as json_file:
                 json.dump(menu_data, json_file, indent=4)
             st.success('Menu has been saved to menu.json.')
         else:
