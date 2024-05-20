@@ -1,6 +1,5 @@
 from creds import WEATHER_API_KEY,WEATHER_API_URL
 import requests
-import collections
 
 def get_weather(city):
     response = requests.get(
