@@ -62,6 +62,9 @@ def add_details(filename):
     for dish in  data['items']:
         dish['type']=categorize_food(dish['Dish Name'])
         dish['Ingredients']=dish['Ingredients'].replace(', ','|')
+        #work on creating dynamic description based off temp
+        #work on creating the page
+        #fine tune
     print(data)
 
 def create_page(filename):
@@ -71,6 +74,5 @@ def create_page(filename):
     markdown_data+=f"##{data['restaurant_name']}\n"
 
 
-#print(create_page('jj'))
+
 add_details("hardik'skitchen.json")
-#print(recommend_food_type(24,84))
