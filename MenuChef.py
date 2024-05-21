@@ -11,7 +11,9 @@ st.set_page_config(initial_sidebar_state="collapsed")
 
 st.markdown("""<style>[data-testid="collapsedControl"] {display: none}</style>""",unsafe_allow_html=True)
 
-st.title('Restaurant Menu Manager')
+st.title('Welcome To MenuChef 👨‍🍳📃')
+st.markdown('###### Enter the details below and we will cook a digital menu for you!')
+st.markdown('###### Items in the menu will dynamically adjust according to the weather in your city!')
 
 st.header('Restaurant Details')
 restaurant_name = st.text_input('Enter the name of the restaurant')
@@ -67,11 +69,6 @@ with CookBtn:
             add_details(menu_data["filename"]+'.json')            
             create_page(menu_data["filename"]+'.json')            
             url=APP_URL+menu_data["filename"]
-            st.success("Your menu is live at 🔗 [url](%s)" % url)
+            st.success("Your menu is live 🔗 [here!](%s)" % url)
         else:
             st.error('No items to save.')
-
-#WORK ON UI DISPLAYING MESSAGES
-#WORK ON SIDEBAR NOT SHOWING
-#THEN MAKE PITCH VIDEO
-#WRAP UP CODING ASAP AND PATCH UP
