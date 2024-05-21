@@ -114,7 +114,7 @@ def generate_markdown(filename):
         data=json.load(file)    
     hierarchy=recommend_food_type(get_weather(data['city'])['temp']) 
     markdown_data=''        
-    markdown_data+=f"# {data['restaurant_name']}\n"
+    markdown_data+=f"# Welcome To {data['restaurant_name']}\n"
     dishes=list()
     for i in hierarchy:
         for dish in data['items']:
