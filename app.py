@@ -1,4 +1,5 @@
-from helpers import get_cities,get_ingredients, get_weather,get_currencies
+from helpers import get_cities,get_ingredients,get_currencies,add_details,create_page
+from creds import APP_URL
 import streamlit as st
 import pandas as pd
 import json
@@ -49,6 +50,7 @@ with ResetBtn:
 with CookBtn:
     if st.button('Cook Menu'):
         if st.session_state['items']:
+            st.success("Generating...")
             menu_data = {
                 "filename":restaurant_name.replace(' ',''),
                 'restaurant_name': restaurant_name,
@@ -58,6 +60,14 @@ with CookBtn:
             }
             with open(fr'Menus\{menu_data["filename"]}.json', 'w') as json_file:
                 json.dump(menu_data, json_file, indent=4)
-            st.success('Menu has been saved to menu.json.')
+            add_details(menu_data["filename"]+'.json')            
+            create_page(menu_data["filename"]+'.json')            
+            url="https://realhardik18.github.io"
+            st.success("Your menu is live at 🔗 [link](%s)" % url)
         else:
             st.error('No items to save.')
+
+#WORK ON UI DISPLAYING MESSAGES
+#WORK ON SIDEBAR NOT SHOWING
+#THEN MAKE PITCH VIDEO
+#WRAP UP CODING ASAP AND PATCH UP

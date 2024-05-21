@@ -1,0 +1,16 @@
+{
+    "filename": "ramu'skitchen",
+    "restaurant_name": "ramu's kitchen ",
+    "city": "New Delhi",
+    "currency": "INR",
+    "items": [
+        {
+            "Dish Name": "pizza",
+            "Price": "INR 200.00",
+            "Ingredients": "olives | pepperoni | jalapenos",
+            "type": "1",
+            "DescriptionF": "\"Indulge in our mouthwatering Pizza \ud83c\udf55, perfect for a hot summer day! Stay cool with every bite. \u2600\ufe0f\ud83c\udf0a\"",
+            "DescriptionNF": "\"Indulge in our mouthwatering pizza, a perfect blend of flavors \ud83c\udf55\ud83d\ude0b - always fresh and hot, just for you!\""
+        }
+    ]
+}

@@ -88,45 +88,50 @@ def get_ingredients():
 def add_details(filename):
     with open(f'Menus\{filename}') as file:
         data=json.load(file)
-    hierarchy=recommend_food_type(get_weather(data['city'])['temp'])        
-    data['hierarchy']=hierarchy
     for dish in data['items']:
         dish['type']=categorize_food(dish['Dish Name'])
         dish['Ingredients']=dish['Ingredients'].replace(', ',' | ')
-
-        if hierarchy.index(dish['type'])==0:
-            favorable=True
-        else:
-            favorable=False
-
-        dish['Description']=generate_description(dish['Dish Name'],data['city'],favorable)
+        dish['DescriptionF']=generate_description(dish['Dish Name'],data['city'],True)
+        dish['DescriptionNF']=generate_description(dish['Dish Name'],data['city'],False)
     file.close()
     with open(f'Menus\{filename}', "w") as file:
         json.dump(data, file,indent=4)
 
-def generate_item(dish_data):
+def generate_item(dish_data,favourable):
+    if favourable:
+        end='F'
+    else:
+        end='NF'
     dish_markdown=''
     dish_markdown+=f"### **{dish_data['Dish Name']}** - {dish_data['Price']}\n"
-    dish_markdown+=f"- *{dish_data['Description']}*\n"
+    dish_markdown+=f"- *{dish_data['Description'+end]}*\n"
     dish_markdown+=f"   - *{dish_data['Ingredients']}*\n"
     return dish_markdown
 
-def create_page(filename):
-    markdown_data=''
+def generate_markdown(filename):
     with open(f'Menus\{filename}') as file:
-        data=json.load(file)
+        data=json.load(file)    
+    hierarchy=recommend_food_type(get_weather(data['city'])['temp']) 
+    markdown_data=''        
     markdown_data+=f"# {data['restaurant_name']}\n"
-    order=data["hierarchy"]
     dishes=list()
-    for i in order:
+    for i in hierarchy:
         for dish in data['items']:
             if dish['type']==i:
                 dishes.append(dish)
     for dish in dishes:
-        markdown_data+=generate_item(dish)
+        if dish['type']==hierarchy[0]:
+            markdown_data+=generate_item(dish,True)
+        else:
+            markdown_data+=generate_item(dish,False)
     return markdown_data
 
+def create_page(filename):
+    filename_python="".join(x for x in filename.replace('.json','') if x.isalnum())+'.py'
+    with open(f'pages/{filename_python}','w',encoding="utf-8") as file:
+        file.write('import streamlit as st\n')
+        file.write('from helpers import generate_markdown\n')        
+        file.write(f'data=generate_markdown("{filename}")\n')
+        file.write(f'st.markdown(data)\n')
 
-
-#print(create_page("hardik'skitchen.json"))
-#add_details("hardik'skitchen.json")
+#print(create_page#"hardik'skitchen.json"))
