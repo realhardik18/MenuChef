@@ -4,12 +4,12 @@ import requests
 import replicate
 import json
 
-replicate=replicate.Client(api_token=st.secrets("SNOWFLAKE_API_TOKEN"))
+replicate=replicate.Client(api_token=st.secrets["SNOWFLAKE_API_TOKEN"])
 
 def get_weather(city):
     response = requests.get(
-        st.secrets("WEATHER_API_URL")+city.format(city),
-        headers={'X-Api-Key': st.secrets("WEATHER_API_KEY")})
+        st.secrets["WEATHER_API_URL"]+city.format(city),
+        headers={'X-Api-Key': st.secrets["WEATHER_API_KEY"]})
     return response.json()
 
 def recommend_food_type(temperature):
