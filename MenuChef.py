@@ -57,7 +57,7 @@ with CookBtn:
         if st.session_state['items']:
             st.success("Generating...")
             menu_data = {
-                "filename":restaurant_name.replace(' ',''),
+                "filename": "".join(x for x in restaurant_name if x.isalnum()),
                 'restaurant_name': restaurant_name,
                 'city': city,
                 'currency': currency,
