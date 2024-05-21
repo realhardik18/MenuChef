@@ -70,6 +70,6 @@ with CookBtn:
             url=st.secrets["APP_URL"]+menu_data["filename"]
             create_QR(url,menu_data["filename"])
             st.success("Your menu is live [here!](%s)🔗" % url)
-            st.image(create_QR(url=url),caption="save, print and stick this QR on your tables!")
+            st.image("https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=Example",caption="save, print and stick this QR on your tables!")
         else:
             st.error('No items to save.')
