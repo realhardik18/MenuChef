@@ -92,7 +92,7 @@ def add_details(filename):
     data['hierarchy']=hierarchy
     for dish in data['items']:
         dish['type']=categorize_food(dish['Dish Name'])
-        dish['Ingredients']=dish['Ingredients'].replace(', ','|')
+        dish['Ingredients']=dish['Ingredients'].replace(', ',' | ')
 
         if hierarchy.index(dish['type'])==0:
             favorable=True
@@ -104,13 +104,29 @@ def add_details(filename):
     with open(f'Menus\{filename}', "w") as file:
         json.dump(data, file,indent=4)
 
-#work on this
+def generate_item(dish_data):
+    dish_markdown=''
+    dish_markdown+=f"### **{dish_data['Dish Name']}** - {dish_data['Price']}\n"
+    dish_markdown+=f"- *{dish_data['Description']}*\n"
+    dish_markdown+=f"   - *{dish_data['Ingredients']}*\n"
+    return dish_markdown
+
 def create_page(filename):
     markdown_data=''
     with open(f'Menus\{filename}') as file:
         data=json.load(file)
-    markdown_data+=f"##{data['restaurant_name']}\n"
+    markdown_data+=f"# {data['restaurant_name']}\n"
+    order=data["hierarchy"]
+    dishes=list()
+    for i in order:
+        for dish in data['items']:
+            if dish['type']==i:
+                dishes.append(dish)
+    for dish in dishes:
+        markdown_data+=generate_item(dish)
+    return markdown_data
 
 
 
-add_details("hardik'skitchen.json")
+#print(create_page("hardik'skitchen.json"))
+#add_details("hardik'skitchen.json")
