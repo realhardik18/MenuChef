@@ -68,6 +68,6 @@ with CookBtn:
             add_details(menu_data["filename"]+'.json')            
             create_page(menu_data["filename"]+'.json')            
             url=st.secrets["APP_URL"]+menu_data["filename"]
-            st.success("Your menu is live 🔗 [here!](%s)" % url)
+            st.success("Your menu is live [here!](%s)🔗" % url)
         else:
             st.error('No items to save.')
