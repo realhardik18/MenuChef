@@ -131,6 +131,8 @@ def create_page(filename):
     with open(f'pages/{filename_python}','w',encoding="utf-8") as file:
         file.write('import streamlit as st\n')
         file.write('from helpers import generate_markdown\n')        
+        file.write('st.set_page_config(initial_sidebar_state="collapsed")\n')
+        file.write('st.markdown("""<style>[data-testid="collapsedControl"] {display: none}</style>""",unsafe_allow_html=True)\n')
         file.write(f'data=generate_markdown("{filename}")\n')
         file.write(f'st.markdown(data)\n')
 

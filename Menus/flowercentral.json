@@ -1,0 +1,24 @@
+{
+    "filename": "flowercentral",
+    "restaurant_name": "flower central ",
+    "city": "Hyderabad",
+    "currency": "INR",
+    "items": [
+        {
+            "Dish Name": "pizza",
+            "Price": "INR 20.00",
+            "Ingredients": "eggs | garlic | water | olive oil | milk | flour",
+            "type": "1",
+            "DescriptionF": "\"Indulge in our delicious, freshly baked pizza \ud83c\udf55\ud83d\ude0b, perfect for a warm and sunny day! #PizzaLove #WarmWeather\"",
+            "DescriptionNF": "\"Savor the ultimate comfort food with our mouthwatering Pizza \ud83c\udf55\ud83d\ude0b, baked to perfection and loaded with your favorite toppings! #PizzaLove\""
+        },
+        {
+            "Dish Name": "pasta",
+            "Price": "INR 300.00",
+            "Ingredients": "eggs | garlic | water | olive oil | milk | flour",
+            "type": "1",
+            "DescriptionF": "\"Indulge in our delicious pasta dish, perfect for a warm day! \ud83c\udf1e\ud83c\udf5d\"",
+            "DescriptionNF": "\"Indulge in the delightful taste of our homemade pasta, perfectly cooked and smothered in rich sauces. \ud83c\udf5d\ud83d\udc4c\""
+        }
+    ]
+}

@@ -7,6 +7,10 @@ import json
 if 'items' not in st.session_state:
     st.session_state['items'] = []
 
+st.set_page_config(initial_sidebar_state="collapsed")
+
+st.markdown("""<style>[data-testid="collapsedControl"] {display: none}</style>""",unsafe_allow_html=True)
+
 st.title('Restaurant Menu Manager')
 
 st.header('Restaurant Details')
@@ -62,8 +66,8 @@ with CookBtn:
                 json.dump(menu_data, json_file, indent=4)
             add_details(menu_data["filename"]+'.json')            
             create_page(menu_data["filename"]+'.json')            
-            url="https://realhardik18.github.io"
-            st.success("Your menu is live at 🔗 [link](%s)" % url)
+            url=APP_URL+menu_data["filename"]
+            st.success("Your menu is live at 🔗 [url](%s)" % url)
         else:
             st.error('No items to save.')
 
