@@ -23,7 +23,7 @@ def recommend_food_type(temperature):
     if temperature <= 20:
         score_HTF+=1
         score_CTF-=1
-    elif 20 < temperature <= 35:
+    elif 20 < temperature <= 30:
         score_RTF+=1
         score_CTF-=1
     else:
