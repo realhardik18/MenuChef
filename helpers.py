@@ -137,5 +137,3 @@ def create_page(filename):
         file.write(f'data=generate_markdown("{filename}")\n')
         file.write(f'st.markdown(data)\n')
 
-def create_QR(url,name):
-    return f"https://api.qrserver.com/v1/create-qr-code/?size=150x150&data={url}"

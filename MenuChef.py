@@ -1,4 +1,4 @@
-from helpers import get_cities,get_ingredients,get_currencies,add_details,create_page,create_QR
+from helpers import get_cities,get_ingredients,get_currencies,add_details,create_page
 import streamlit as st
 import pandas as pd
 import json
@@ -68,8 +68,8 @@ with CookBtn:
             add_details(menu_data["filename"]+'.json')            
             create_page(menu_data["filename"]+'.json')            
             url=st.secrets["APP_URL"]+menu_data["filename"]
-            create_QR(url,menu_data["filename"])
+            QR_URL=url.replace('https://','')
             st.success("Your menu is live [here!](%s)🔗" % url)
-            st.image("https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=Example",caption="save, print and stick this QR on your tables!")
+            st.image(f"https://api.qrserver.com/v1/create-qr-code/?size=150x150&data={QR_URL}",caption="save, print and stick this QR on your tables!")
         else:
             st.error('No items to save.')
