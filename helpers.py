@@ -3,6 +3,7 @@ import streamlit as st
 import requests
 import replicate
 import json
+import qrcode
 
 replicate=replicate.Client(api_token=st.secrets["SNOWFLAKE_API_TOKEN"])
 
@@ -135,5 +136,9 @@ def create_page(filename):
         file.write('st.markdown("""<style>[data-testid="collapsedControl"] {display: none}</style>""",unsafe_allow_html=True)\n')
         file.write(f'data=generate_markdown("{filename}")\n')
         file.write(f'st.markdown(data)\n')
+
+def create_QR(url,name):
+    QR = qrcode.make(url)
+    QR.save(f"{name}.png", "PNG")
 
 #print(create_page#"hardik'skitchen.json"))
