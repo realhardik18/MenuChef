@@ -1,5 +1,4 @@
 from helpers import get_cities,get_ingredients,get_currencies,add_details,create_page
-from creds import APP_URL
 import streamlit as st
 import pandas as pd
 import json
@@ -68,7 +67,7 @@ with CookBtn:
                 json.dump(menu_data, json_file, indent=4)
             add_details(menu_data["filename"]+'.json')            
             create_page(menu_data["filename"]+'.json')            
-            url=APP_URL+menu_data["filename"]
+            url=st.secrets("APP_URL")+menu_data["filename"]
             st.success("Your menu is live 🔗 [here!](%s)" % url)
         else:
             st.error('No items to save.')

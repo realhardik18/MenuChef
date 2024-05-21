@@ -1,15 +1,15 @@
-from creds import WEATHER_API_KEY,WEATHER_API_URL,SNOWFLAKE_API_TOKEN
 from prompts import categorize_food_prompt,description_prompt
+import streamlit as st
 import requests
 import replicate
 import json
 
-replicate=replicate.Client(api_token=SNOWFLAKE_API_TOKEN)
+replicate=replicate.Client(api_token=st.secrets("SNOWFLAKE_API_TOKEN"))
 
 def get_weather(city):
     response = requests.get(
-        WEATHER_API_URL+city.format(city),
-        headers={'X-Api-Key': WEATHER_API_KEY})
+        st.secrets("WEATHER_API_URL")+city.format(city),
+        headers={'X-Api-Key': st.secrets("WEATHER_API_KEY")})
     return response.json()
 
 def recommend_food_type(temperature):
