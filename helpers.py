@@ -138,7 +138,4 @@ def create_page(filename):
         file.write(f'st.markdown(data)\n')
 
 def create_QR(url,name):
-    QR = qrcode.make(url)
-    QR.save(f"{name}.png", "PNG")
-
-#print(create_page#"hardik'skitchen.json"))
+    return f"https://api.qrserver.com/v1/create-qr-code/?size=150x150&data={url}"
