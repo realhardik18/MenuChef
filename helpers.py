@@ -71,22 +71,22 @@ def generate_description(item,city,favorable):
     return ''.join(responses).strip(' ')
 
 def get_currencies():
-    with open('DropDownOptions\currencies.txt','r') as file:
+    with open('DropDownOptions/currencies.txt','r') as file:
         currencies='%'.join(file.readlines()).replace('\n','').replace('\t','').split('%')    
     return currencies
 
 def get_cities():
-    with open('DropDownOptions\cities.txt','r') as file:
+    with open('DropDownOptions/cities.txt','r') as file:
         cities='%'.join(file.readlines()).replace('\n','').replace('\t','').split('%')    
     return cities
 
 def get_ingredients():
-    with open('DropDownOptions\Ingredients.txt','r') as file:
+    with open('DropDownOptions/Ingredients.txt','r') as file:
         ingredients='%'.join(file.readlines()).replace('\n','').replace('\t','').split('%')    
     return ingredients
 
 def add_details(filename):
-    with open(f'Menus\{filename}') as file:
+    with open(f'Menus/{filename}') as file:
         data=json.load(file)
     for dish in data['items']:
         dish['type']=categorize_food(dish['Dish Name'])
@@ -94,7 +94,7 @@ def add_details(filename):
         dish['DescriptionF']=generate_description(dish['Dish Name'],data['city'],True)
         dish['DescriptionNF']=generate_description(dish['Dish Name'],data['city'],False)
     file.close()
-    with open(f'Menus\{filename}', "w") as file:
+    with open(f'Menus/{filename}', "w") as file:
         json.dump(data, file,indent=4)
 
 def generate_item(dish_data,favourable):
@@ -109,7 +109,7 @@ def generate_item(dish_data,favourable):
     return dish_markdown
 
 def generate_markdown(filename):
-    with open(f'Menus\{filename}') as file:
+    with open(f'Menus/{filename}') as file:
         data=json.load(file)    
     hierarchy=recommend_food_type(get_weather(data['city'])['temp']) 
     markdown_data=''        

@@ -63,7 +63,7 @@ with CookBtn:
                 'currency': currency,
                 'items': st.session_state['items']
             }
-            with open(fr'Menus\{menu_data["filename"]}.json', 'w') as json_file:
+            with open(fr'Menus/{menu_data["filename"]}.json', 'w') as json_file:
                 json.dump(menu_data, json_file, indent=4)
             add_details(menu_data["filename"]+'.json')            
             create_page(menu_data["filename"]+'.json')            
